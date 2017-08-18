@@ -1,0 +1,25 @@
+<a href="/logout">Logout</a>
+
+<h2>Doctor's Appointments</h2>
+
+<div *ngIf = "appt_list">
+<table>
+  <tr>
+    <th>Date</th>
+    <th>Time</th>
+    <th>Patient Name</th>
+    <th>Complaint</th>
+  </tr>
+    <tr *ngFor="let appt of appt_list | orderby: 'date': '[desc]' | filtersearch:search_text">
+    <td>{{ appt.date | date:mediumDate }}</td>
+    <td>{{ appt.time }}</td>
+    <td>{{ appt.patient }}</td>
+    <td>{{ appt.complaint }}
+      <button *ngIf="appt.patient == current_user.name" (click)="delete_appt(appt)">Cancel</button>
+    </td>
+  </tr>
+</table>
+<p>search by name or complaint</p>
+<input type="text" name="search_text" placeholder="search" [(ngModel)]="search_text">
+</div>
+<button [routerLink]="['/#new-appt']">Add New Appointment</button>

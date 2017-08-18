@@ -1,0 +1,35 @@
+<h2>New Appointment</h2>
+<form #apptform="ngForm" (submit)="add_appt()">
+  <input
+    type="date"
+    name="appt-date"
+    [(ngModel)]="new_appt.date"
+    #apptdate="ngModel"
+    required
+    [min]="min_date"
+    >
+  <input
+    type="time"
+    name="appt-time"
+    [(ngModel)]="new_appt.time"
+    #appttime="ngModel"
+    required
+    min="08:00"
+    max="17:00"
+    >
+  <input type="text"
+    name="complaint"
+    [(ngModel)]="new_appt.complaint"
+    #complaint="ngModel"
+    required
+    minlength="10"
+    maxlength="1000"
+    >
+  <button [routerLink]="['']">Cancel</button>
+
+  <p><input type="submit" value="Add Appointment" [disabled]="!current_user || apptform.invalid"></p>
+
+</form>
+<!-- <p>{{ new_appt.date }}</p>
+<p>{{ min_date }}</p>
+<p>{{ new_appt.time }}</p> -->
